@@ -6,6 +6,9 @@ ARG VERSION
 LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
 LABEL maintainer="saarg"
 
+# package version
+ARG DOMOTICZ_VER="3.8153"
+
 # environment settings
 ENV HOME="/config"
 
@@ -39,6 +42,7 @@ RUN \
 	make \
 	mosquitto-dev \
 	musl-dev \
+	openzwave-dev \
 	pkgconf \
 	sqlite-dev \
 	tar \
@@ -48,6 +52,7 @@ RUN \
 	curl \
 	eudev-libs \
 	libressl \
+	openzwave \
 	python3-dev && \
  echo "**** link libftdi libs ****" && \
  ln -s /usr/lib/libftdi1.so /usr/lib/libftdi.so && \
@@ -73,19 +78,8 @@ RUN \
  mv /tmp/telldus-core/client/telldus-core.h /usr/include/telldus-core.h && \
  ln -s /usr/lib/libtelldus-core.so.2.1.2 /usr/lib/libtelldus-core.so.2 && \
  ln -s /usr/lib/libtelldus-core.so.2 /usr/lib/libtelldus-core.so && \
- echo "**** build openzwave ****" && \
- git clone https://github.com/OpenZWave/open-zwave.git /tmp/open-zwave && \
- ln -s /tmp/open-zwave /tmp/open-zwave-read-only && \
- cd /tmp/open-zwave && \
- make && \
- make \
-	instlibdir=usr/lib \
-	pkgconfigdir="usr/lib/pkgconfig/" \
-	PREFIX=/usr \
-	sysconfdir=etc/openzwave \
- install && \
  echo "**** build domoticz ****" && \
- git clone https://github.com/domoticz/domoticz.git /tmp/domoticz && \
+ git clone -b "${DOMOTICZ_VER}" https://github.com/domoticz/domoticz.git /tmp/domoticz && \
  cd /tmp/domoticz && \
  cmake \
 	-DBUILD_SHARED_LIBS=True \
