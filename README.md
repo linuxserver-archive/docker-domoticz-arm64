@@ -107,4 +107,5 @@ The user manual is available at [www.domoticz.com][appurl]
 
 ## Versions
 
-+ **04.01.2018:** Initial Release.
++ **18.01.18:** Remove logging to syslog in the run command to prevent double logging.
++ **04.01.18:** Initial Release.
