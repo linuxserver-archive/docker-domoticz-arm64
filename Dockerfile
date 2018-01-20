@@ -57,7 +57,7 @@ RUN \
  mkdir -p \
 	/tmp/telldus-core && \
  curl -o /tmp/telldus-core.tar.gz -L \
-	http://download.telldus.se/TellStick/Software/telldus-core/telldus-core-2.1.2.tar.gz && \
+	http://download.telldus.com/TellStick/Software/telldus-core/telldus-core-2.1.2.tar.gz && \
  tar xf /tmp/telldus-core.tar.gz -C \
 	/tmp/telldus-core --strip-components=1 && \
  curl -o /tmp/telldus-core/Doxyfile.in -L \
